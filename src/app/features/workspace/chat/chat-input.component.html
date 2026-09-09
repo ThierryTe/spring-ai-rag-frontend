@@ -1,0 +1,20 @@
+<div class="chat-input">
+  <textarea
+    #textarea
+    class="chat-input__field"
+    rows="1"
+    [attr.placeholder]="placeholder()"
+    [disabled]="disabled()"
+    aria-label="Votre question"
+    (keydown)="onKeydown($event)"
+  ></textarea>
+  <button
+    type="button"
+    class="chat-input__send"
+    [disabled]="disabled()"
+    (click)="submit()"
+    aria-label="Envoyer la question"
+  >
+    ➤
+  </button>
+</div>

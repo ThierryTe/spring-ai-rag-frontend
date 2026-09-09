@@ -1,0 +1,44 @@
+<div
+  class="dropzone"
+  [class.is-dragover]="isDragOver()"
+  [class.is-disabled]="quotaReached()"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave()"
+  (drop)="onDrop($event)"
+>
+  <label class="dropzone__label">
+    <input
+      type="file"
+      accept=".pdf,.docx,.txt"
+      [disabled]="quotaReached()"
+      (change)="onFilesSelected($event)"
+      aria-label="Ajouter un document"
+    />
+    @if (quotaReached()) {
+      <span>Quota de documents atteint pour cette session</span>
+    } @else {
+      <span>Glissez un document ici ou <strong>parcourir</strong></span>
+      <span class="dropzone__hint">PDF, DOCX ou TXT — 20 Mo max</span>
+    }
+  </label>
+</div>
+
+@for (upload of uploadsInFlight(); track upload.fileName) {
+  <div class="upload-progress">
+    <span class="upload-progress__name">{{ upload.fileName }}</span>
+    <div
+      class="upload-progress__bar"
+      role="progressbar"
+      [attr.aria-label]="'Envoi de ' + upload.fileName"
+      [attr.aria-valuenow]="upload.progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+    >
+      <div class="upload-progress__fill" [style.width.%]="upload.progress"></div>
+    </div>
+  </div>
+}
+
+@if (uploadError(); as error) {
+  <p class="upload-error" role="alert">{{ error.message }}</p>
+}

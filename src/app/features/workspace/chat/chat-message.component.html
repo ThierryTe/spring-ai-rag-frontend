@@ -1,0 +1,17 @@
+@let msg = message();
+<div
+  class="chat-message"
+  [class.chat-message--user]="msg.role === 'user'"
+  [class.chat-message--assistant]="msg.role === 'assistant'"
+  [class.chat-message--refused]="msg.role === 'assistant' && msg.refused"
+>
+  <span class="chat-message__author">{{ msg.role === 'user' ? 'Vous' : 'AI' }}</span>
+  <p class="chat-message__text">{{ msg.text }}</p>
+  @if (msg.role === 'assistant' && msg.refused) {
+    <p class="chat-message__refused-hint">Réponse non sourcée dans vos documents.</p>
+  }
+
+  @if (msg.role === 'assistant') {
+    <app-source-list [sources]="msg.sources" />
+  }
+</div>

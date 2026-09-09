@@ -1,0 +1,15 @@
+<div class="document-item">
+  <span class="document-item__icon" aria-hidden="true">📄</span>
+  <div class="document-item__info">
+    <span class="document-item__name">{{ document().filename }}</span>
+    <span class="document-item__meta">
+      @if (sizeLabel(); as size) {
+        {{ size }}
+      }
+      @if (document().pageCount) {
+        · {{ document().pageCount }} pages
+      }
+    </span>
+  </div>
+  <app-document-status-badge [status]="document().status" />
+</div>

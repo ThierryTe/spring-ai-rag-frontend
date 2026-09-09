@@ -1,0 +1,21 @@
+@if (sources().length > 0) {
+  <div class="source-list">
+    <button
+      type="button"
+      class="source-list__toggle"
+      [attr.aria-expanded]="expanded()"
+      (click)="toggle()"
+    >
+      {{ sources().length }} source{{ sources().length > 1 ? 's' : '' }} utilisée{{ sources().length > 1 ? 's' : '' }}
+      <span class="source-list__chevron" [class.is-open]="expanded()">▾</span>
+    </button>
+
+    @if (expanded()) {
+      <div class="source-list__items">
+        @for (source of sources(); track source.referenceNumber) {
+          <app-source-card [source]="source" />
+        }
+      </div>
+    }
+  </div>
+}

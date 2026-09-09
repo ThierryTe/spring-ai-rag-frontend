@@ -1,0 +1,13 @@
+<nav class="sidebar-nav" aria-label="Navigation principale">
+  @for (item of items(); track item.path) {
+    <a
+      class="sidebar-nav__item"
+      [routerLink]="item.path"
+      routerLinkActive="is-active"
+      #rla="routerLinkActive"
+      [attr.aria-current]="rla.isActive ? 'page' : null"
+    >
+      {{ item.label }}
+    </a>
+  }
+</nav>

@@ -1,0 +1,22 @@
+- generic [ref=e32]:
+  - complementary [ref=e33]:
+    - generic [ref=e34]: AI Compliance Copilot
+    - navigation "Navigation principale" [ref=e36]:
+      - link "Fichiers" [ref=e37] [cursor=pointer]:
+        - /url: /workspace/files
+      - link "Chat" [ref=e38] [cursor=pointer]:
+        - /url: /workspace/chat
+  - generic [ref=e39]:
+    - banner [ref=e40]:
+      - generic [ref=e41]: 0/5 questions
+      - generic [ref=e42]: 0/2 documents
+      - generic [ref=e43]: Expire à 02:13
+      - generic [ref=e44]: Session active
+    - generic [ref=e48]:
+      - generic [ref=e50]:
+        - paragraph [ref=e51]: Bonjour 👋
+        - paragraph [ref=e52]: Posez une question sur vos documents.
+      - generic [ref=e55]:
+        - textbox "Votre question" [ref=e56]:
+          - /placeholder: Posez votre question…
+        - button "Envoyer la question" [ref=e57] [cursor=pointer]: ➤

@@ -1,0 +1,38 @@
+@use '../../../styles/breakpoints';
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+
+  @include breakpoints.mobile-down {
+    flex-direction: row;
+    padding: 0;
+  }
+}
+
+.sidebar-nav__item {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-decoration: none;
+
+  &:hover {
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  &.is-active {
+    background: var(--color-primary);
+    color: var(--color-primary-contrast);
+    font-weight: 600;
+  }
+
+  @include breakpoints.mobile-down {
+    flex: 1;
+    text-align: center;
+    border-radius: 0;
+  }
+}

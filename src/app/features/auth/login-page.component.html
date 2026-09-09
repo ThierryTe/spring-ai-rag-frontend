@@ -1,0 +1,27 @@
+<main class="login">
+  <app-card class="login__card">
+    <p class="login__eyebrow">AI Compliance Copilot</p>
+    <h1 class="login__title">Connexion</h1>
+    <p class="login__subtitle">Accès rôle EMPLOYEE / MANAGER / ADMIN.</p>
+
+    <form class="login__form" (submit)="$event.preventDefault(); submit()">
+      <label class="login__field">
+        <span>Email</span>
+        <input #email type="email" name="email" autocomplete="username" required />
+      </label>
+
+      <label class="login__field">
+        <span>Mot de passe</span>
+        <input #password type="password" name="password" autocomplete="current-password" required />
+      </label>
+
+      @if (authStore.error(); as error) {
+        <p class="login__error" role="alert">{{ error.message }}</p>
+      }
+
+      <app-button type="submit" [disabled]="authStore.isAuthenticating()">
+        {{ authStore.isAuthenticating() ? 'Connexion…' : 'Se connecter' }}
+      </app-button>
+    </form>
+  </app-card>
+</main>

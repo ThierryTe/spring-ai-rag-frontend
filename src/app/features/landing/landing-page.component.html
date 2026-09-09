@@ -1,0 +1,35 @@
+<main class="landing">
+  <section class="hero">
+    <p class="hero__eyebrow">AI Compliance Copilot</p>
+    <h1 class="hero__title">Comprenez vos documents.</h1>
+    <p class="hero__subtitle">Obtenez des réponses basées sur vos sources.</p>
+
+    <app-button class="hero__cta" [disabled]="sessionStore.isCreating()" (click)="startSession()">
+      {{ sessionStore.isCreating() ? 'Création de la session…' : 'Commencer une session' }}
+    </app-button>
+
+    @if (sessionStore.error()) {
+      <p class="hero__error" role="alert">{{ sessionStore.error()?.message }}</p>
+    }
+
+    <ul class="hero__badges" aria-label="Points clés">
+      <li>RAG</li>
+      <li>Sources vérifiables</li>
+      <li>Analyse documentaire</li>
+    </ul>
+  </section>
+
+  <section class="how-it-works" aria-labelledby="how-it-works-title">
+    <h2 id="how-it-works-title">Comment ça marche ?</h2>
+    <ol class="how-it-works__steps">
+      <li><app-card>Déposez vos documents</app-card></li>
+      <li><app-card>Laissez l'IA les analyser</app-card></li>
+      <li><app-card>Posez vos questions</app-card></li>
+      <li><app-card>Vérifiez les sources</app-card></li>
+    </ol>
+  </section>
+
+  <p class="disclaimer">
+    AI-generated responses should be verified against the cited sources.
+  </p>
+</main>

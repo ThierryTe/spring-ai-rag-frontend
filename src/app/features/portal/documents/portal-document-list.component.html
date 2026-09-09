@@ -1,0 +1,37 @@
+<div class="document-list">
+  <h2 class="document-list__title">Documents</h2>
+
+  @if (canUpload()) {
+    <app-portal-document-upload />
+  }
+
+  @switch (true) {
+    @case (documentsStore.listResource.status() === 'loading') {
+      <div class="document-list__skeleton" aria-hidden="true">
+        @for (row of [1, 2, 3]; track row) {
+          <div class="document-list__skeleton-row">
+            <app-skeleton width="24px" height="24px" />
+            <div class="document-list__skeleton-lines">
+              <app-skeleton width="70%" />
+              <app-skeleton width="40%" height="0.75em" />
+            </div>
+          </div>
+        }
+      </div>
+      <p class="sr-only" role="status">Chargement des documents…</p>
+    }
+    @case (documentsStore.listResource.status() === 'error') {
+      <app-error-state [message]="errorMessage()" (retry)="retryLoad()" />
+    }
+    @case (documentsStore.documents().length === 0) {
+      <app-empty-state message="Aucun document accessible dans votre périmètre." />
+    }
+    @default {
+      <div class="document-list__items">
+        @for (doc of documentsStore.documents(); track doc.id) {
+          <app-document-item [document]="doc" />
+        }
+      </div>
+    }
+  }
+</div>

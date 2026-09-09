@@ -1,0 +1,8 @@
+services:
+  app:
+    image: ghcr.io/thierryte/spring-ai-rag-frontend:latest
+    container_name: ai-compliance-copilot-frontend
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${FRONTEND_PORT:-8081}:80"

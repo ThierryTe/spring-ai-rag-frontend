@@ -1,0 +1,18 @@
+<!-- No "view source" action: the backend exposes no endpoint to fetch a document's raw content. -->
+<app-card [padded]="false">
+  <div class="source-card">
+    <span class="source-card__icon" aria-hidden="true">📄</span>
+    <div class="source-card__info">
+      <span class="source-card__title">{{ source().documentTitle || source().filename }}</span>
+      <span class="source-card__meta">
+        @if (source().pageNumber) {
+          Page {{ source().pageNumber }}
+        }
+        @if (source().sectionLabel) {
+          · {{ source().sectionLabel }}
+        }
+        · Similarité {{ similarityLabel() }}
+      </span>
+    </div>
+  </div>
+</app-card>

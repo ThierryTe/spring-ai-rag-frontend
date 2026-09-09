@@ -1,0 +1,39 @@
+<div class="app-shell">
+  <aside class="app-shell__sidebar">
+    <span class="app-shell__brand">AI Compliance Copilot</span>
+    <app-sidebar-nav [items]="menuItems()" />
+  </aside>
+
+  <div class="app-shell__main">
+    <header class="app-shell__header">
+      @if (mode === 'workspace') {
+        @if (sessionStore.quota(); as quota) {
+          <span class="app-shell__quota">{{ quota.questionsUsed }}/{{ quota.maxQuestions }} questions</span>
+          <span class="app-shell__quota">{{ quota.documentsUsed }}/{{ quota.maxDocuments }} documents</span>
+        }
+        @if (expiresAtLabel(); as expiry) {
+          <span class="app-shell__quota">Expire à {{ expiry }}</span>
+        }
+        <app-badge class="app-shell__session-badge" tone="success">Session active</app-badge>
+      } @else {
+        @if (authStore.currentUser(); as user) {
+          <span class="app-shell__user">{{ user.fullName }}</span>
+          <app-badge tone="neutral">{{ user.roleCode }}</app-badge>
+          <span
+            class="app-shell__departments"
+            [attr.title]="user.allowedDepartments.length + ' département(s) autorisé(s)'"
+          >
+            {{ user.allowedDepartments.length }} département(s)
+          </span>
+        }
+        <app-button class="app-shell__logout" variant="ghost" size="sm" (click)="logout()">
+          Déconnexion
+        </app-button>
+      }
+    </header>
+
+    <div class="app-shell__content">
+      <router-outlet />
+    </div>
+  </div>
+</div>

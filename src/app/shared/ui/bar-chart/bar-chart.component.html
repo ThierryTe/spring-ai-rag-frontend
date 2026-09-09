@@ -1,0 +1,15 @@
+@if (data().length === 0) {
+  <p class="bar-chart__empty">{{ emptyMessage() }}</p>
+} @else {
+  <div class="bar-chart" role="img" [attr.aria-label]="data().map((d) => d.label + ': ' + d.value).join(', ')">
+    @for (datum of data(); track datum.label) {
+      <div class="bar-chart__row">
+        <span class="bar-chart__label" [attr.title]="datum.label">{{ datum.label }}</span>
+        <div class="bar-chart__track">
+          <div class="bar-chart__fill" [style.width.%]="widthPercent(datum.value)"></div>
+        </div>
+        <span class="bar-chart__value">{{ datum.value }}</span>
+      </div>
+    }
+  </div>
+}

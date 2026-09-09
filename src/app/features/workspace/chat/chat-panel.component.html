@@ -1,0 +1,39 @@
+<div class="chat-panel">
+  <div class="chat-panel__messages" aria-live="polite">
+    @if (chatStore.messages().length === 0) {
+      <div class="chat-panel__welcome">
+        <p>Bonjour 👋</p>
+        <p>Posez une question sur vos documents.</p>
+      </div>
+    }
+
+    @for (message of chatStore.messages(); track message.id) {
+      <app-chat-message [message]="message" />
+    }
+
+    @if (chatStore.isAnswering()) {
+      <div class="chat-panel__typing-bubble" aria-hidden="true">
+        <app-skeleton width="70%" />
+        <app-skeleton width="45%" />
+      </div>
+      <p class="sr-only" role="status">L'IA réfléchit…</p>
+    }
+
+    @if (chatStore.lastError(); as error) {
+      <div class="chat-panel__error" role="alert">
+        <p>{{ error.message }}</p>
+        @if (error.kind !== 'quota_exceeded' && error.kind !== 'session_expired') {
+          <app-button variant="danger" size="sm" (click)="onRetry()">Réessayer</app-button>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="chat-panel__input">
+    <app-chat-input
+      [disabled]="!chatStore.canAsk()"
+      [placeholder]="chatStore.quotaExhausted() ? 'Quota de questions atteint' : 'Posez votre question…'"
+      (send)="onSend($event)"
+    />
+  </div>
+</div>
