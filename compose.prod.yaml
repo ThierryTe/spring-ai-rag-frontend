@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/thierryte/spring-ai-rag-frontend:latest
+    image: ghcr.io/thierryte/ai-compliance-copilot-frontend:latest
     container_name: ai-rag-frontend
     restart: unless-stopped
     env_file: .env
