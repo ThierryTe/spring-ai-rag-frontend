@@ -8,7 +8,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE: ghcr.io/thierryte/ai-compliance-copilot-frontend
+  IMAGE: ghcr.io/thierryte/spring-ai-rag-frontend
 
 jobs:
   build-and-push:
