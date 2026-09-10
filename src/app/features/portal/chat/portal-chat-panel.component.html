@@ -22,12 +22,18 @@
     @if (chatStore.lastError(); as error) {
       <div class="chat-panel__error" role="alert">
         <p>{{ error.message }}</p>
-        <app-button variant="danger" size="sm" (click)="onRetry()">Réessayer</app-button>
+        @if (error.kind !== 'quota_exceeded') {
+          <app-button variant="danger" size="sm" (click)="onRetry()">Réessayer</app-button>
+        }
       </div>
     }
   </div>
 
   <div class="chat-panel__input">
-    <app-chat-input [disabled]="!chatStore.canAsk()" (send)="onSend($event)" />
+    <app-chat-input
+      [disabled]="!chatStore.canAsk()"
+      [placeholder]="chatStore.quotaBlocked() ? 'Quota de questions atteint' : 'Posez votre question…'"
+      (send)="onSend($event)"
+    />
   </div>
 </div>

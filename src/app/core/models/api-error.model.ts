@@ -2,6 +2,7 @@ export type AppErrorKind =
   | 'session_expired'
   | 'auth_expired'
   | 'invalid_credentials'
+  | 'forbidden'
   | 'quota_exceeded'
   | 'validation'
   | 'llm_unavailable'
