@@ -6,3 +6,10 @@ services:
     env_file: .env
     ports:
       - "${FRONTEND_PORT:-8081}:80"
+    networks:
+      - default
+      - spring-ai-rag_default
+
+networks:
+  spring-ai-rag_default:
+    external: true
