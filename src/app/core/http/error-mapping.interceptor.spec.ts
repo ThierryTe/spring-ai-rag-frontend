@@ -59,6 +59,15 @@ describe('errorMappingInterceptor', () => {
     });
   });
 
+  it('maps 403 to forbidden, replacing the backend message with a fixed French one', () => {
+    expectError(
+      '/api/admin/observability/summary',
+      403,
+      { status: 403, error: 'Forbidden', message: 'Access denied', path: '/api/admin/observability/summary' },
+      { kind: 'forbidden', status: 403, message: "Vous n'avez pas les droits nécessaires pour effectuer cette action." },
+    );
+  });
+
   it('maps 429 to quota-exceeded, keeping the backend message', () => {
     expectError(
       '/api/demo/chat',

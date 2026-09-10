@@ -49,6 +49,14 @@ function toAppError(err: HttpErrorResponse): AppError {
         status: 401,
         message: 'Votre session a expiré. Veuillez vous reconnecter.',
       };
+    case 403:
+      // The backend's message for 403 is a generic, English, internal string ("Access denied")
+      // set by Spring Security before the request reaches our controllers — never show it as-is.
+      return {
+        kind: 'forbidden',
+        status: 403,
+        message: "Vous n'avez pas les droits nécessaires pour effectuer cette action.",
+      };
     case 429:
       return {
         kind: 'quota_exceeded',

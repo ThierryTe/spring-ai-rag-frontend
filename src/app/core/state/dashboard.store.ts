@@ -25,6 +25,8 @@ export class DashboardStore {
       : "Impossible de charger les métriques d'observabilité.";
   });
 
+  readonly errorRetryable = computed(() => !isForbiddenError(this.summaryResource.error()));
+
   constructor() {
     effect(() => {
       if (isAuthExpiredError(this.summaryResource.error())) {
@@ -40,4 +42,8 @@ export class DashboardStore {
 
 function isAuthExpiredError(err: unknown): boolean {
   return !!err && typeof err === 'object' && (err as Partial<AppError>).kind === 'auth_expired';
+}
+
+function isForbiddenError(err: unknown): boolean {
+  return !!err && typeof err === 'object' && (err as Partial<AppError>).kind === 'forbidden';
 }

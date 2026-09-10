@@ -15,7 +15,11 @@
       <app-loading-state message="Chargement des métriques…" />
     }
     @case (!!dashboardStore.errorMessage()) {
-      <app-error-state [message]="dashboardStore.errorMessage()!" (retry)="retryLoad()" />
+      <app-error-state
+        [message]="dashboardStore.errorMessage()!"
+        [retryable]="dashboardStore.errorRetryable()"
+        (retry)="retryLoad()"
+      />
     }
     @default {
       <div class="dashboard__tiles">
