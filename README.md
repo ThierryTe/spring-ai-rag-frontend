@@ -8,7 +8,7 @@ Angular  →  Spring Boot  →  OpenAI
 ```
 
 This is a standalone repository, independent from the backend
-([`spring-ai-multitenant-rag`](https://github.com/ThierryTe/spring-ai-multitenant-rag),
+([`spring-ai-rag`](https://github.com/ThierryTe/spring-ai-multitenant-rag),
 checked out as a sibling directory during local development) — separate git history, CI, and
 deployment pipeline. See [`docs/DEPLOY.md`](docs/DEPLOY.md) for how the two are wired together
 in production despite living in different repos.
